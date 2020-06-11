@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/afs2015/frontend-master-fox-game/issues"
   },
-  "homepage": "https://github.com/afs2015/frontend-master-fox-game#readme"
+  "homepage": "https://github.com/afs2015/frontend-master-fox-game#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
 }
