@@ -1,0 +1,20 @@
+{
+  "name": "frontend-master-fox-game",
+  "version": "1.0.0",
+  "description": "Frontend masters build-a-game class project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afs2015/frontend-master-fox-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/afs2015/frontend-master-fox-game/issues"
+  },
+  "homepage": "https://github.com/afs2015/frontend-master-fox-game#readme"
+}
