@@ -1,8 +1,6 @@
-const TICK_RATE = 2000; // Tick every 2 seconds
+import game from "./gameState";
 
-function tick() {
-  console.log("tick", Date.now());
-}
+const TICK_RATE = 2000; // Tick every 2 seconds
 
 async function init() {
   console.log("starting game");
@@ -12,7 +10,7 @@ async function init() {
     const now = Date.now();
 
     if (nextTimeToTick <= now) {
-      tick();
+      game.tick();
       nextTimeToTick = now + TICK_RATE;
     }
     requestAnimationFrame(nextAnimationFrame);
