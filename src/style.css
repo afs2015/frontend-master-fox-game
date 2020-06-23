@@ -22,3 +22,31 @@ body {
   right: 0;
   bottom: 0;
 }
+
+.frame {
+  height: 762px;
+  width: 762px;
+  position: relative;
+}
+
+.inner {
+  position: relative;
+}
+
+.game {
+  width: 628px;
+  height: 577px;
+  position: absolute;
+  top: 62px;
+  left: 67px;
+}
+
+.game.night {
+  width: 716px;
+  top: 62px;
+  left: -19px;
+}
+
+.hidden {
+  display: none;
+}
