@@ -1,9 +1,10 @@
-import game from "./gameState";
-
-const TICK_RATE = 2000; // Tick every 2 seconds
+import game, { handleUserAction } from "./gamestate";
+import { TICK_RATE } from "./constants";
+import initButtons from "./buttons";
 
 async function init() {
   console.log("starting game");
+  initButtons(handleUserAction);
 
   let nextTimeToTick = Date.now();
   function nextAnimationFrame() {
