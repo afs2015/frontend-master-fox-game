@@ -6,6 +6,7 @@ import {
   NIGHT_LENGTH,
   getNextDieTime,
   getNextHungerTime,
+  getNextPoopTime,
 } from "./constants";
 
 const gameState = {
@@ -95,7 +96,15 @@ const gameState = {
     console.log("CleanUpPoop");
   },
   feed() {
-    console.log("feed");
+    if (this.current !== "HUNGRY") {
+      return;
+    }
+
+    this.current = "FEEDING";
+    this.dieTime = -1;
+    this.poopTime = getNextPoopTime(this.clock);
+    modFox("eating");
+    this.timeToStartCelebrating = this.clock + 2;
   },
 };
 
