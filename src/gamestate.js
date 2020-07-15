@@ -87,6 +87,7 @@ const gameState = {
     this.timeToEndCelebrating = -1;
     this.current = "IDLING";
     this.determineFoxState();
+    togglePoopBag(false);
   },
   determineFoxState() {
     if (this.current === "IDLING") {
