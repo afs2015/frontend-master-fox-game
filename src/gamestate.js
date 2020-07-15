@@ -1,4 +1,4 @@
-import { modFox, modScene } from "./ui";
+import { modFox, modScene, togglePoopBag } from "./ui";
 import {
   RAIN_CHANCE,
   SCENES,
@@ -128,7 +128,14 @@ const gameState = {
     console.log("changeweather");
   },
   cleanUpPoop() {
-    console.log("CleanUpPoop");
+    if (!this.current === 'POOPING') {
+      return;
+    }
+
+    this.dieTime = -1;
+    togglePoopBag(true);
+    this.startCelebrating();
+    this.hungryTime = getNextHungerTime(this.clock);
   },
   feed() {
     if (this.current !== "HUNGRY") {
