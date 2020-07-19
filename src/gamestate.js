@@ -1,4 +1,4 @@
-import { modFox, modScene, togglePoopBag } from "./ui";
+import { modFox, modScene, togglePoopBag, writeModal } from "./ui";
 import {
   RAIN_CHANCE,
   SCENES,
@@ -35,7 +35,7 @@ const gameState = {
       this.startCelebrating();
     } else if (this.clock === this.timeToEndCelebrating) {
       this.endCelebrating();
-    } elis if (this.clock === this.poopTime) {
+    } else if (this.clock === this.poopTime) {
       this.poop();
     }
 
@@ -46,6 +46,7 @@ const gameState = {
     this.wakeTime = this.clock + 2;
     modFox("egg");
     modScene("day");
+    writeModal();
   },
   wake() {
     this.current = "IDLING";
@@ -60,7 +61,17 @@ const gameState = {
     this.state = "SLEEP";
     modFox("sleep");
     modScene("night");
+    this.clearTimes();
     this.wakeTime = this.clock + NIGHT_LENGTH;
+  },
+  clearTimes() {
+    this.wakeTime = -1;
+    this.sleepTime = -1;
+    this.hungryTime = -1;
+    this.dieTime = -1;
+    this.poopTime = -1;
+    this.timeToStartCelebrating = -1;
+    this.timeToEndCelebrating = -1;
   },
   getHungry() {
     this.current = "HUNGRY";
@@ -72,10 +83,14 @@ const gameState = {
     this.current = "POOPING";
     this.poopTime = -1;
     this.dieTime = getNextDieTime(this.clock);
-    modFox('pooping');
+    modFox("pooping");
   },
   die() {
-    console.log("lol dead");
+    this.current = "DEAD";
+    modScene("dead");
+    modFox("dead");
+    this.clearTimes();
+    writeModal("The fox died :( <br/> Press the middle button to start");
   },
   startCelebrating() {
     this.current = "CELEBRATING";
@@ -131,16 +146,15 @@ const gameState = {
     this.determineFoxState();
   },
   cleanUpPoop() {
-    if (!this.current === 'POOPING') {
-      return;
+    if (this.current === "POOPING") {
+      this.dieTime = -1;
+      togglePoopBag(true);
+      this.startCelebrating();
+      this.hungryTime = getNextHungerTime(this.clock);
     }
-
-    this.dieTime = -1;
-    togglePoopBag(true);
-    this.startCelebrating();
-    this.hungryTime = getNextHungerTime(this.clock);
   },
   feed() {
+    // can only feed when hungry
     if (this.current !== "HUNGRY") {
       return;
     }
